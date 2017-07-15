@@ -23,6 +23,10 @@ import {
 } from '../settings/settings';
 
 import {
+  MapPage
+} from '../map/map';
+
+import {
   AngularFireAuth
 } from "angularfire2/auth";
 
@@ -40,7 +44,9 @@ export class TabsPage {
     this.tabs.push({page : HomePage, icon : "home", name: "Home" });
     this.tabs.push({page : AboutPage, icon : "information-circle", name: "About" });
     this.tabs.push({page : ContactPage, icon : "contacts", name: "Contacts" });
+    this.tabs.push({page : MapPage, icon : "map", name: "Map" });
     this.tabs.push({page : SettingsPage, icon : "settings", name: "Settings" });
+
 
     console.log(navParams);
 

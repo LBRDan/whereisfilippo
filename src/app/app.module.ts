@@ -8,6 +8,7 @@ import { MyApp } from './app.component';
 import { AboutPage } from '../pages/about/about';
 import { ContactPage } from '../pages/contact/contact';
 import { HomePage } from '../pages/home/home';
+import { MapPage } from '../pages/map/map' ;
 import { TabsPage } from '../pages/tabs/tabs';
 import { SettingsPage } from '../pages/settings/settings';
 
@@ -31,7 +32,8 @@ import { AuthProvider } from '../providers/auth/auth';
     HomePage,
     LoginPage,
     TabsPage,
-    SettingsPage
+    SettingsPage,
+    MapPage
   ],
   imports: [
     BrowserModule,
@@ -47,7 +49,8 @@ import { AuthProvider } from '../providers/auth/auth';
     ContactPage,
     HomePage,
     TabsPage,
-    SettingsPage
+    SettingsPage,
+    MapPage
   ],
   providers: [
     StatusBar,
