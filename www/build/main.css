@@ -25032,6 +25032,36 @@ ion-navbar.toolbar {
   display: none;
 }
 
+page-settings .button-container {
+  -webkit-align-self: flex-end;
+  -ms-flex-item-align: end;
+  align-self: flex-end;
+  text-align: right;
+}
+
+page-settings .item {
+  -webkit-box-align: baseline;
+  -webkit-align-items: baseline;
+  -ms-flex-align: baseline;
+  align-items: baseline;
+}
+
+page-settings icons {
+  background-color: #fff;
+  border: 1px solid #7f8c8d;
+  color: #7f8c8d;
+  margin: 0;
+  font-size: 0.9em;
+}
+
+page-settings .name {
+  margin: 0;
+}
+
+page-settings .handle {
+  margin: 0;
+}
+
 .ion-ios-add:before {
   content: "\f102";
 }
