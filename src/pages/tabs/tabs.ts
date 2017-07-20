@@ -47,7 +47,6 @@ export class TabsPage {
     this.tabs.push({page : MapPage, icon : "map", name: "Map" });
     this.tabs.push({page : SettingsPage, icon : "settings", name: "Settings" });
 
-
     console.log(navParams);
 
   }

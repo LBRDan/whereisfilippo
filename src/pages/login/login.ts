@@ -29,7 +29,9 @@ export class LoginPage {
     this.loading = this.loadingCtrl.create({
       content: 'Please wait...'
     });
-    this.loading.present();
+    this.loading.present().then(res => {
+      console.log(res);
+    });
   }
 
   async login (user:User){
@@ -60,20 +62,14 @@ export class LoginPage {
     async ionViewDidLoad() {
       console.log('ionViewDidLoad LoginPage');
 
-      //await this.authPrv.getStatus();
-
-      if(this.authPrv._authState && this.authPrv._authState.email){
-        this.navCtrl.setRoot(TabsPage);
-      }
-      this.loading.dismiss();
-
-      /*
-      this.authPrv.getStatus().subscribe(checkOnline => {
-        if(checkOnline && checkOnline.email){
+      let authSub = this.authPrv.getStatus().subscribe(data => {
+        // could use data, but this it's hacky...
+        if(this.authPrv._authState && this.authPrv._authState.email){
           this.navCtrl.setRoot(TabsPage);
         }
+        authSub.unsubscribe();
+        this.loading.dismiss();
       });
-      */
 
 
   }

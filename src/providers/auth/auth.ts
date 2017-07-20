@@ -21,6 +21,7 @@ import { NavController, App } from "ionic-angular/index";
 export class AuthProvider {
   public _authState : any = null;
   private nav:NavController;
+  private subScriptionLoginState : any = null ;
 
   constructor(public angularFire: AngularFireAuth, public toastCtrl : ToastController,
   private alertCtrl: AlertController,
@@ -34,7 +35,9 @@ export class AuthProvider {
     .signInWithPopup(new firebase.auth.GoogleAuthProvider())
     .then(data => {
       console.log(data);
-      this.monitorState();
+      if(!this.subScriptionLoginState){
+        this.subScriptionLoginState = this.monitorState();
+      }
       return Promise.resolve(data)
     });
   }
@@ -43,7 +46,9 @@ export class AuthProvider {
     return this.angularFire.auth
     .signInWithEmailAndPassword(email, password)
     .then(res => {
-      this.monitorState();
+      if(!this.subScriptionLoginState){
+        this.subScriptionLoginState = this.monitorState();
+      }
       return Promise.resolve(res)
     });
   }
