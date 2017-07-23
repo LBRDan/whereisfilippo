@@ -57,6 +57,10 @@ export class AuthProvider {
     return this.angularFire.authState.map(data => this._authState = data );
   }
 
+  getUserExists (){
+    
+  }
+
   monitorState(){
     this.getStatus().subscribe(data => {
       console.log(data);

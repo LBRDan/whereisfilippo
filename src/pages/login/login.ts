@@ -1,11 +1,10 @@
-import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController, AlertController } from 'ionic-angular';
-import { TabsPage } from '../../pages/tabs/tabs';
+import { Component } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
 
 import { User } from './../../models/user';
 
 import { AuthProvider } from '../../providers/auth/auth';
-
 
 /**
  * Generated class for the LoginPage page.
@@ -21,11 +20,20 @@ import { AuthProvider } from '../../providers/auth/auth';
 export class LoginPage {
   user = {} as User;
   public loading : any;
+  myForm : any ;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, 
+  constructor(public navCtrl: NavController, 
+    public navParams: NavParams, 
     public authPrv: AuthProvider,
     public loadingCtrl: LoadingController,
-    public alertCtrl : AlertController) {
+    public alertCtrl : AlertController,
+    public formBuilder: FormBuilder) {
+    
+    this.myForm = formBuilder.group({
+        username: ['', Validators.compose([Validators.required, Validators.email])],
+        password: ['', Validators.compose([Validators.minLength(8), Validators.pattern('[a-zA-Z ]*'), Validators.required])],
+    });
+
     this.loading = this.loadingCtrl.create({
       content: 'Please wait...'
     });
@@ -35,10 +43,14 @@ export class LoginPage {
   }
 
   async login (user:User){
+    console.log("Login")
+    if(!this.myForm.valid){
+      return ;
+    }
     try{      
       const res = await this.authPrv.loginWithEmailAndPassword(user.email,user.password);
       if(res){
-        this.navCtrl.setRoot(TabsPage);
+        this.goToHomePage();
       }
       
     }catch(error){
@@ -59,19 +71,23 @@ export class LoginPage {
     this.navCtrl.push('RegisterPage', this.user);
   }
 
-    async ionViewDidLoad() {
-      console.log('ionViewDidLoad LoginPage');
+  async ionViewDidLoad() {
+    console.log('ionViewDidLoad LoginPage');
 
-      let authSub = this.authPrv.getStatus().subscribe(data => {
-        // could use data, but this it's hacky...
-        if(this.authPrv._authState && this.authPrv._authState.email){
-          this.navCtrl.setRoot(TabsPage);
-        }
-        authSub.unsubscribe();
-        this.loading.dismiss();
-      });
+    let authSub = this.authPrv.getStatus().subscribe(data => {
+      // could use data, but this it's hacky...
+      if(this.authPrv._authState && this.authPrv._authState.email){
+        this.goToHomePage();
+      }
+      authSub.unsubscribe();
+      this.loading.dismissAll();
+    });
 
 
+  }
+
+  goToHomePage() {
+    this.navCtrl.setRoot('TabsPage');
   }
 
 
@@ -80,7 +96,7 @@ export class LoginPage {
       
       const res = await this.authPrv.loginWithGoogle();
       if(res){
-        this.navCtrl.setRoot(TabsPage);
+        this.goToHomePage();
       }
       
     }catch(error){

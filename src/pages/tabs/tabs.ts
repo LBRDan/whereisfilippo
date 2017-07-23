@@ -4,33 +4,15 @@ import {
 import {
   IonicPage,
   NavController,
-  NavParams,
-  ToastController
+  NavParams
 } from 'ionic-angular';
 
-import {
-  AboutPage
-} from '../about/about';
-import {
-  ContactPage
-} from '../contact/contact';
-import {
-  HomePage
-} from '../home/home';
-
-import {
-  SettingsPage
-} from '../settings/settings';
-
-import {
-  MapPage
-} from '../map/map';
 
 import {
   AngularFireAuth
 } from "angularfire2/auth";
 
-
+@IonicPage()
 @Component({
   templateUrl: 'tabs.html'
 })
@@ -38,16 +20,16 @@ import {
 export class TabsPage {
   tabs : Array<any> = []  ;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private afAuth: AngularFireAuth,
-    private toastCtrl: ToastController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private afAuth: AngularFireAuth) {
+      console.log("Tabs Lazy Constructor");
 
-    this.tabs.push({page : HomePage, icon : "home", name: "Home" });
-    this.tabs.push({page : AboutPage, icon : "information-circle", name: "About" });
-    this.tabs.push({page : ContactPage, icon : "contacts", name: "Contacts" });
-    this.tabs.push({page : MapPage, icon : "map", name: "Map" });
-    this.tabs.push({page : SettingsPage, icon : "settings", name: "Settings" });
-
-    console.log(navParams);
+      this.tabs.push({page : 'HomePage', icon : "home", name: "Home" });
+      this.tabs.push({page : 'AboutPage', icon : "information-circle", name: "About" });
+      this.tabs.push({page : 'ContactPage', icon : "contacts", name: "Contacts" });
+      this.tabs.push({page : 'MapPage', icon : "map", name: "Map" });
+      this.tabs.push({page : 'SettingsPage', icon : "settings", name: "Settings" });
+      
+      console.log(navParams);
 
   }
 

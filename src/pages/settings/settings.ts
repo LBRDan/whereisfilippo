@@ -1,4 +1,3 @@
-import { LoginPage } from '../login/login';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { User } from './../../models/user';
@@ -38,7 +37,7 @@ export class SettingsPage {
     try{
       var result = await this.authPrv.logOff();
       if(result){
-        this.app.getRootNav().setRoot(LoginPage);
+        this.app.getRootNav().setRoot('LoginPage');
       }
 
     }catch(_errLogoff){
